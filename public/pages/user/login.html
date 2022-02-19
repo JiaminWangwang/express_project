@@ -32,8 +32,13 @@
                 // 用于请求类型：get、post(put、delete)
                 type: 'post',
                 // 请求成功后触发success方法，msg用于接收后端响应回来的结果
-                success(msg) {
-                    console.log(msg);
+                success(res) {
+                    console.log(res);
+                    if (res.status) {
+                        alert('登录成功');
+                    } else {
+                        alert('登录失败');
+                    }
                 }
             })
         })
