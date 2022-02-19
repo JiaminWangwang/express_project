@@ -2,39 +2,40 @@ var express = require('express');
 
 // 后端路由，用于分配前端的请求
 var router = express.Router();
-
-/* GET users listing. */
-
 // 模拟数据库
 const users = [
   {username: '张三', password: '123'},
   {username: '李四', password: '234'},
-]
+];
 
-router.post('/login', function(req, res, next) {
-  console.log('成功进入登录接口后端');
 
-  // 获取前端发送给后端的请求数据
-  // -post req.body
-  // -get req.query
-  console.log(req.body)
-  // todo:登录判断
+// 数据库集合的相关配置
+// 1. 定义数据集合的结构：定义出集合中数据有哪些属性，属性的值是什么类型。
+const { Schema, model } = require('mongoose');
 
-  const result = users.some((item, index) => {
-    return item.username === req.body.username && item.password === req.body.password
-  });
+const usersSchema = new Schema({
+  username: String,
+  password: String
+});
 
-  // 将后端处理结果响应（发送）给前端
-  if (result) {
+// 2. 定义数据集合的模型：将 schema 和数据库中的集合关联起来
+// model('模型名称（自定义）'，usersSchema, '数据库中的集合名称(如果数据库中没有该集合则创建)')
+const usersModel = model('usersModel', usersSchema, 'users')
+
+router.post('/login', async function(req, res, next) {
+  // 接收到前端发送的用户数据
+  const user = req.body;  // { username: '123', password: '456' }
+  const result = await usersModel.find(user);
+  if (result.length > 0) {
     res.send({
       message: '登录成功',
       status: 1
-    });
+    })
   } else {
     res.send({
       message: '登录失败',
       status: 0
-    });
+    })
   }
 });
 
