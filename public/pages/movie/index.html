@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+    <h3>电影页面</h3>
+    <label>电影名：</label>
+    <input id="movieName" value="" placeholder="电影名" />
+    <button id="getMovieBtn">确定</button>
+
+    <script src="../../js/jquery.min.js"></script>
+    <script>
+        $('#getMovieBtn').click(function () {
+            const name = $('#movieName').val();
+
+            $.ajax({
+                // 设置前后端连接的接口，请求到app.js中的配置一级路径下面
+                // app.js中配置路由的代码会去找users/login接口
+                url: '/movies/get',
+                // 设置前端发送给后端的数据
+                data: {
+                    name
+                },
+                // 用于请求类型：get、post(put、delete)
+                type: 'get',
+                // 请求成功后触发success方法，msg用于接收后端响应回来的结果
+                success(msg) {
+                    console.log(msg);
+                }
+            })
+        })
+    </script>
+</body>
+</html>

@@ -40,3 +40,12 @@
     ```
     nodemon 命令报错
     [ 解决方案参考](https://blog.csdn.net/webjxy/article/details/121193543)
+
+
+7. 下载jquery，使用jquery的ajax处理前端请求
+    ```js
+    npm i jquery --save
+
+    // 将下载到node_modules文件夹中的jquery.min.js复制到public/js文件夹中，方便前端代码引用
+    ```
+

@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var movieRouter = require('./routes/movies');
 
 var app = express();
 
@@ -19,8 +20,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// 用于配置 ajax 请求的一级路径
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/movies', movieRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
