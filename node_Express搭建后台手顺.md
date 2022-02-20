@@ -1,23 +1,23 @@
 ## Node_Express搭建前后台手顺
 [Express官网](https://www.expressjs.com.cn/)
 **前提：已安装nodejs**
-1. 全局安装express-generator(exExpress应用生成器)
+1. **全局安装express-generator(exExpress应用生成器)**
     ```js
     npm i express-generator -g
     ```
-2. 创建Express项目
+2. **创建Express项目**
     ```js
     express express-project
     ```
-3. 下载项目依赖包
+3. **下载项目依赖包**
     ```js
     npm i
     ```
-4. 启动项目
+4. **启动项目**
     ```js
     npm start
     ```
-5. 在浏览器中输入以下地址：
+5. **在浏览器中输入以下地址：**
     ```js
     // localhost:3000
     ```
@@ -31,7 +31,7 @@
 + app.js -- 服务器入口文件
 
 
-6. 保存文件自动重启服务插件
+6. **保存文件自动重启服务插件**
     ```js
     npm i nodemon -g
 
@@ -42,15 +42,15 @@
     [解决方案参考](https://blog.csdn.net/webjxy/article/details/121193543)
 
 
-7. 下载jquery，使用jquery的ajax处理前端请求
+7. **下载jquery，使用jquery的ajax处理前端请求**
     ```js
     npm i jquery --save
 
     // 将下载到node_modules文件夹中的jquery.min.js复制到public/js文件夹中，方便前端代码引用
     ```
 
-8. 安装MongoDB
-    [安装MongoDB](https://www.runoob.com/mongodb/mongodb-window-install.html)
+8. **安装MongoDB**
+   > [安装MongoDB链接](https://www.runoob.com/mongodb/mongodb-window-install.html)
     #### **命令行操作**
     1. 找到MongoDB安装包中的bin/mongo.exe,双击打开;
     2. 查看当前MongoDB服务器中所有的数据库：在MongoDB终端输入 
@@ -79,13 +79,13 @@
         db.集合名称.find().pretty()   // 格式化之后的
         ```
     
-9. 安装navicat(数据库可视化工具)
+9. **安装navicat(数据库可视化工具)**
     1. ![连接第一步](./public/img/mongoDB-connect-1.png)
     2. ![连接第二步](./public/img/mongoDB-connect-2.png)
     3. ![连接第三步](./public/img/mongoDB-connect-3.png)
     4. ![连接成功](./public/img/mongoDB-connected.png)
 
-10. 通过后端代码操作数据库
+10. **通过后端代码操作数据库**
     1. **连接数据库**
     ```js
     // 下载mongoose: mongoose是Nodejs中提供的一个用于便捷操作MongoDB的库。
@@ -144,3 +144,13 @@
     ```js
     usersModel.updateOne({_id: 1}, { username: 'lisi', password: '123' }); // 第一个参数，查找更新的数据；第二个参数，更新的新数据。
     ```
+11. **后端代码三层架构拆分**
+> ![连接第一步](./public/img/mongoDB-connect-1.png)
+ 1. 表现层：处理前端请求
+ 2. 服务层：处理业务逻辑(业务逻辑相关代码)
+ 3. 持久层：操作数据库(放和操作数据库相关的东西)
+
+> 代码文件拆分
+ 1. 表现层：routes
+ 2. 服务层：service
+ 3. 持久层：dao
