@@ -86,6 +86,7 @@
     4. ![连接成功](./public/img/mongoDB-connected.png)
 
 10. 通过后端代码操作数据库
+    1. **连接数据库**
     ```js
     // 下载mongoose: mongoose是Nodejs中提供的一个用于便捷操作MongoDB的库。
     npm i mongoose --save
@@ -99,4 +100,47 @@
     mongoose.connection.on('connected', function() {
         console.log(dbURI + '数据库连接成功');
     })
+    ```
+    2. **配置集合**
+    当数据库连接成功之后，就可以开始去操作数据库中的集合了。
+    但是，在首次操作之前，需要先对要操作的集合进行相关的配置。
+    + **配置集合结构**：定义出集合中数据有哪些属性，每一个属性的值是什么数据类型。
+    ```js
+    const { Schema } = require('mongoose');
+
+    const usersSchema = new Schema({
+        username: String,
+        password: String
+    });
+    ```
+
+    + **配置集合模型**
+        - 将上一步中的schema集合结构和数据库中的集合关联起来，得到一个数据模型。
+        - 所有关于数据集合中数据的操作方法，都是数据模型提供的。
+        ```js
+        const { model } = require('mongoose');
+        const usersModel = model('usersModel', usersSchema, 'users')
+        ``` 
+    3. **操作数据**
+    + 查询、查找
+        - 按条件查询
+        ```js
+        usersModel.find({ username: '张三' });
+        ```
+        - 查询所有数据
+        ```js
+        usersModel.find()
+        ```
+    + 新增
+    ```js
+    usersModel.create({username: '123', password: '123'});
+    ```
+    + 删除
+    ```js
+    usersModel.deleteOne({ _id: '1' }); // 删除一条_id: '1' 的数据
+    usersModel.deleteMany({ username: 'zhangsan' }); // 删除所有 username: 'zhangsan' 的数据
+    ```
+    + 修改
+    ```js
+    usersModel.updateOne({_id: 1}, { username: 'lisi', password: '123' }); // 第一个参数，查找更新的数据；第二个参数，更新的新数据。
     ```
