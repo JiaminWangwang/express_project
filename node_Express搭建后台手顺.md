@@ -154,3 +154,7 @@
  1. 表现层：routes
  2. 服务层：service
  3. 持久层：dao
+
+ 12. **node作为代理服务器**
+ > 见 proxy-service 项目
+ 
